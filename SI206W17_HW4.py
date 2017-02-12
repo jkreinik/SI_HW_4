@@ -54,9 +54,12 @@ except:
 ## NOTE that the provided link does not include saving the online data in a file as part of the process. But it still provides very useful hints/tricks about how to look for and identify the headlines on the NY Times page.
 headlines = [] 
 soup = BeautifulSoup(text_data_from_site, "html.parser")
-for title in soup.find_all(class_="story-heading"): 
+headline = soup.find_all(class_="story-heading")
+for title in headline: 
     if title.a: 
         headlines.append(title.a.text.replace("\n", " ").strip()) 
+    else: 
+    	headlines.append(title.contents[0].strip())    
 
 nytimes_headlines = headlines[0:10]
 print (nytimes_headlines)
