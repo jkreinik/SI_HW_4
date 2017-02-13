@@ -62,7 +62,7 @@ for title in headline:
     	headlines.append(title.contents[0].strip())    
 
 nytimes_headlines = headlines[0:10]
-print (nytimes_headlines)
+#print (nytimes_headlines)
 
     
 
@@ -98,10 +98,21 @@ umsi_titles = {}
 ## Find the container that holds the name that belongs to that person (HINT: look for something unique, like a property element...)
 ## Find the container that holds the title that belongs to that person (HINT: a class name)
 ## Grab the text of each of those elements and put them in the dictionary umsi_titles properly
+names_in_directory = [] 
+descriptions_in_directory = []
 
+names = soup.find_all('div',{'class':"field field-name-title field-type-ds field-label-hidden"})
+for x in names: 
+	names_in_directory.append(x.text)
 
+descriptions = soup.find_all('div',{'class':'field-name-field-person-titles'})
+for x in descriptions: 
+	descriptions_in_directory.append(x.text)
 
+for x in range(len(names_in_directory)): 
+	umsi_titles[names_in_directory[x]] = descriptions_in_directory[x]
 
+print (umsi_titles)	
 
 
 
